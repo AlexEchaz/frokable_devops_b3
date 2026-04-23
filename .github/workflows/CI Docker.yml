@@ -27,7 +27,7 @@ jobs:
       - name: Check containers status
         run: |
           docker compose ps
-          docker compose logs
+          docker compose logs backend
 
       - name: Wait for backend to be ready
         run: |
