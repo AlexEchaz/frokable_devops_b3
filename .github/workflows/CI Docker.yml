@@ -24,11 +24,6 @@ jobs:
       - name: Start containers
         run: docker compose up -d
 
-      - name: Debug backend
-        run: |
-          docker compose logs backend
-          docker inspect frokable_devops_b3-backend-1 | grep -A5 '"Cmd"'
-
       - name: Wait for backend
         run: |
           sleep 5
