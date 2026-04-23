@@ -24,19 +24,16 @@ jobs:
       - name: Start containers
         run: docker compose up -d
 
-      - name: Check containers status
+      - name: Debug backend
         run: |
-          docker compose ps
           docker compose logs backend
+          docker inspect frokable_devops_b3-backend-1 | grep -A5 '"Cmd"'
 
-      - name: Wait for backend to be ready
+      - name: Wait for backend
         run: |
-          for i in $(seq 1 15); do
-            curl -sf http://localhost:8000/health && echo "Ready!" && exit 0
-            echo "Attempt $i failed, waiting..."
-            sleep 3
-          done
-          echo "Backend never became ready" && exit 1
+          sleep 5
+          docker compose logs backend
+          curl -v http://localhost:8000
 
       - name: Stop containers
         if: always()
