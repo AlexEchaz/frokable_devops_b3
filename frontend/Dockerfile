@@ -14,3 +14,19 @@
 # Pourquoi multi-stage ? L'image finale ne doit pas contenir Node ni
 # node_modules — juste les fichiers statiques servis par Nginx.
 # ─────────────────────────────────────────────────────────────────────────────
+
+# Stage 1: Build the React app
+FROM node:20-alpine as builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage 2: Create the production image
+FROM nginx:alpine as runner
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
+USER nginx
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
