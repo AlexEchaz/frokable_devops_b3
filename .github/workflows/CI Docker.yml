@@ -17,6 +17,7 @@ jobs:
         run: |
           echo "MONGO_URL=${{secrets.MONGO_URL}}" >> .env
           echo "SECRET_KEY=${{secrets.SECRET_KEY}}" >> .env
+          cat .env
 
       - name: Build containers
         run: docker compose build
