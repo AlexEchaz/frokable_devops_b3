@@ -17,7 +17,6 @@ jobs:
         run: |
           echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> .env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-          cat .env
 
       - name: Build containers
         run: docker compose build
@@ -33,7 +32,6 @@ jobs:
       - name: Wait for backend
         run: |
           sleep 5
-          docker compose logs backend
           curl -v http://localhost:8000
 
       - name: Stop containers
