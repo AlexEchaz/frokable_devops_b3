@@ -117,3 +117,4 @@ cp .env.example .env
 | Variable    | Description                         | Valeur par défaut              |
 |-------------|-------------------------------------|--------------------------------|
 | `SECRET_KEY`| Clé de signature des JWT            | `changeme_local_dev`           |
+
