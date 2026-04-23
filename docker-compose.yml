@@ -52,3 +52,5 @@ services:
 
 volumes:
   mongo-data: 
+
+# docker compose up -d
