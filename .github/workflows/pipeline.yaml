@@ -31,7 +31,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: monuser/monapp-backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/monapp-backend:latest
 
       # STEP 4 : builder et pusher l'image du Frontend
       - name: Build & push Frontend
@@ -40,4 +40,4 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: monuser/monapp-frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/monapp-frontend:latest
